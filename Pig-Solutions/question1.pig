@@ -5,4 +5,5 @@ movies = filter inputFile by Region!='Region';
 groupedByRegion = group movies by Region;
 describe groupedByRegion;
 noOfVideoTilesWatchedPerRegion = foreach groupedByRegion generate group,COUNT(movies.Region);
-dump noOfVideoTilesWatchedPerRegion;
+store noOfVideoTilesWatchedPerRegion into 'pig-question1';
+
