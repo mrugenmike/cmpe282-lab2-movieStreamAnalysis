@@ -1,5 +1,5 @@
 /* No of Video Titles watched in different regions.*/
-inputFile = load 'movies.csv' using PigStorage(',') as (UserId,TitleID,VideoTitles,VideoCategory,Region);
+inputFile = load 'stream_movie_data.csv' using PigStorage(',') as (UserId,TitleID,VideoTitles,VideoCategory,Region);
 describe inputFile;
 movies = filter inputFile by Region!='Region';
 groupedByRegion = group movies by Region;
