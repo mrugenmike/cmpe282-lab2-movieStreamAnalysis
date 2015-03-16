@@ -3,7 +3,9 @@ inputFile = load 'stream_movie_data.csv' using PigStorage(',') as (UserId,TitleI
 describe inputFile;
 movies = filter inputFile by Region!='Region';
 groupedByRegion = group movies by Region;
-describe groupedByRegion;
-noOfVideoTilesWatchedPerRegion = foreach groupedByRegion generate group,COUNT(movies.Region);
-store noOfVideoTilesWatchedPerRegion into 'pig-question1';
 
+noOfVideoTilesWatchedPerRegion = foreach groupedByRegion {
+distinct_titles = distinct movies.VideoTitles;
+generate group,COUNT(distinct_titles);
+};
+store noOfVideoTilesWatchedPerRegion into 'pig-question1';
