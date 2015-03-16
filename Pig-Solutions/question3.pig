@@ -5,7 +5,7 @@ movies = filter inputFile by Region!='Region'; -- filtered the headerline
 
 grpByDeviceType = group movies by DeviceType;
 noOfUsersOnDifferentDevices = foreach grpByDeviceType {
---unique_users = DISTINCT movies.UserId;
-generate group, COUNT(movies.UserId) as Count;
+unique_users = DISTINCT movies.UserId;
+generate group, COUNT(unique_users) as Count;
 };
 store noOfUsersOnDifferentDevices into 'question3-solution';

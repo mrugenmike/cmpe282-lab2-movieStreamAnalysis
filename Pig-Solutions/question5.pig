@@ -4,6 +4,9 @@ movies = filter inputFile by Region!='Region'; -- filtered the headerline
 
 HD_videoTitles = filter movies by StreamType=='HD';
 groupByProtocol = group HD_videoTitles by StreamingProtocol;
-HDTitlesByProtocol = foreach groupByProtocol generate group,COUNT(HD_videoTitles.VideoTitles);
+HDTitlesByProtocol = foreach groupByProtocol {
+unique_video_titles = DISTINCT HD_videoTitles.VideoTitles;
+generate group,COUNT(unique_video_titles);
+ }
 
 store HDTitlesByProtocol into 'q5solution';

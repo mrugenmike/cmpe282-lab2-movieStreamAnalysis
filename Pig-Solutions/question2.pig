@@ -6,6 +6,9 @@ orderByStreamBandwidth =  ORDER movies BY StreamBandwidth DESC;
 maxBandwidth_record = LIMIT orderByStreamBandwidth 1;
 
 USBasedUsersWithMaxBandWidth = filter movies BY Region=='US' and StreamBandwidth==maxBandwidth_record.$7;
-countOfUSBasedUsersWithMaxBandWidth =  FOREACH (GROUP USBasedUsersWithMaxBandWidth ALL) GENERATE COUNT(USBasedUsersWithMaxBandWidth);
+countOfUSBasedUsersWithMaxBandWidth =  FOREACH (GROUP USBasedUsersWithMaxBandWidth ALL){
+unique_user_id = DISTINCT USBasedUsersWithMaxBandWidth.UserId;
+GENERATE COUNT(unique_user_id);
+};
 store countOfUSBasedUsersWithMaxBandWidth into 'pig-question2-solution';
 
