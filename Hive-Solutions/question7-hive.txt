@@ -1,0 +1,1 @@
+select count(a.videotitles) from (select userid,videotitles from movies) a join (select userid as user from movies where videotitles like '%A Cause for Thankfulness%') b where a.userid = b.user;

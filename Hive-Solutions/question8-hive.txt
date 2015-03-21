@@ -1,0 +1,1 @@
+Select videotitles from movies where devicetype = 'tablet' and videocategory = 'Thriller' and region = 'UK' and streambandwidth = '400';

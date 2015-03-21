@@ -1,0 +1,1 @@
+Select count(DISTINCT(userid)) from movies where region = 'US' and devicetype = 'tv' and year(from_unixtime( unix_timestamp(videoplayedtime,'MM/dd/yy HH:mm'))) = 2013 and month(from_unixtime( unix_timestamp(videoplayedtime,'MM/dd/yy HH:mm'))) = 12;

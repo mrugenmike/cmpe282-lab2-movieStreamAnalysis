@@ -1,0 +1,1 @@
+Select count(DISTINCT(videotitles)) from movies where devicetype like '%gaming console%' and year(from_unixtime( unix_timestamp(videoplayedtime,'MM/dd/yy HH:mm') )) = 2013;

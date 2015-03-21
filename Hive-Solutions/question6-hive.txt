@@ -1,0 +1,2 @@
+select uidWithTitlesWatched.dtitles as TitlesWatched,COUNT(uidWithTitlesWatched.uid) as UsersWatchingThem from 
+(select userid as uid,COUNT(DISTINCT(videotitles)) as dtitles from movies group by userid) uidWithTitlesWatched group by uidWithTitlesWatched.dtitles order by uidWithTitlesWatched.dtitles DESC limit 1 ; 

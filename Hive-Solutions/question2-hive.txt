@@ -1,0 +1,1 @@
+select count(distinct(a.userid)) from (select userid, streambandwidth,region from movies) a join (select MAX(streambandwidth) as maxBandwidth from movies) b where a.region = 'US' and a.streambandwidth = b.maxBandwidth;

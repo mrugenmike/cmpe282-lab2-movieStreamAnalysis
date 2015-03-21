@@ -3,7 +3,10 @@ inputFile = load 'stream_movie_data.csv' using PigStorage(',') as (UserId:charar
 describe inputFile;
 movies = filter inputFile by Region!='Region'; -- filtered the headerline
 grpByTitle = group movies by VideoTitles;
-countPerTitle = foreach grpByTitle generate group, COUNT(movies.UserId) as user_count;
+countPerTitle = foreach grpByTitle{
+	unique_users = DISTINCT movies.UserId;
+	generate group, COUNT(unique_users) as user_count;
+	} 
 ordered_By_userCount = order countPerTitle by user_count DESC;
 top5Titles = limit ordered_By_userCount 5;
 store top5Titles into 'question4-solution';

@@ -1,18 +1,3 @@
-// Loading the data in movies table from CSV in hdfs
-CREATE TABLE IF NOT EXISTS movies 
-(userid String,
-titleid int,
-videotitles string,
-videocategory string,
-region String,
-devicetype string,
-streamtype string,
-streambandwidth int,
-streamingprotocol string,
-videoplayedtime string) 
-comment 'Stream Analysis Data' 
-ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' --if it is comma separated file
-LOCATION '/user/mrugen/hive-input';
 
-//Query to answer the question
-select region,COUNT(videotitles) from movies group by region;
+//Query to answer the question1
+select count(distinct(videotitles)),region from movies where movies.userid in (select distinct userid from movies) group by movies.region;
